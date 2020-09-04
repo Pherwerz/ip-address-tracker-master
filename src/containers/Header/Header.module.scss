@@ -1,0 +1,90 @@
+@import '../../variables';
+
+.Header {
+  background-image: url(../../images/pattern-bg.png);
+  position: relative;
+
+  &Container {
+    width: 90%;
+    margin: 0 auto;
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+  }
+
+  &Heading {
+    color: #ffffff;
+    text-align: center;
+    font-weight: 400;
+    margin: 2rem 0;
+  }
+
+  &Form {
+    display: flex;
+    width: 100%;
+    height: 7rem;
+    margin-bottom: 15rem;
+
+    @include respond(phone) {
+      width: 60rem;
+    }
+
+    & > * {
+      cursor: pointer;
+      display: block;
+      border: none;
+
+      &:focus {
+        outline: none;
+      }
+    }
+
+    & input {
+      flex: 1;
+      border-top-left-radius: 2rem;
+      border-bottom-left-radius: 2rem;
+      font-size: 1.8rem;
+      padding-left: 2rem;
+    }
+
+    & button {
+      background-color: #000000;
+      width: 7rem;
+      border-top-right-radius: 2rem;
+      border-bottom-right-radius: 2rem;
+    }
+  }
+
+  &Body {
+    margin-top: 2rem;
+    width: 80%;
+    margin: 0 auto;
+    background-color: #fff;
+    position: absolute;
+    bottom: -40%;
+    z-index: 10000;
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    border-radius: 2rem;
+    padding: 2rem;
+
+    @include respond(phone) {
+      flex-flow: row;
+    }
+  }
+
+  &Items {
+    flex: 1;
+    display: flex;
+    flex-flow: column;
+
+    & p {
+      color: var(--dark-gray);
+    }
+
+    & h2 {
+      color: var(--very-dark-gray);
+    }
+  }
+}
