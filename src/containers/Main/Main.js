@@ -6,9 +6,21 @@ import location from '../../images/icon-location.svg';
 
 class Main extends Component {
   componentDidMount() {
+    this.loadmap();
+  }
+  componentDidUpdate() {
+    var container = leaflet.DomUtil.get('map');
+
+    if (container != null) {
+      container._leaflet_id = null;
+    }
+    this.loadmap();
+  }
+
+  loadmap = () => {
     const map = leaflet
       .map('map')
-      .setView(this.props.latlng, 13);
+      .setView(this.props.latlng, 17);
 
     leaflet
       .tileLayer(
@@ -27,7 +39,9 @@ class Main extends Component {
     leaflet
       .marker(this.props.latlng, { icon: myIcon })
       .addTo(map);
-  }
+
+    return map;
+  };
 
   render() {
     let maps = (

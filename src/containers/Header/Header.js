@@ -3,10 +3,12 @@ import styles from './Header.module.scss';
 import go from '../../images/icon-arrow.svg';
 import { connect } from 'react-redux';
 import * as actionTypes from '../../store/action/action';
+import Spinner from '../../components/spinner';
 
 const Header = props => {
   return (
     <header className={styles.Header}>
+      {props.spin ? <Spinner /> : null}
       <div className={styles.HeaderContainer}>
         <h1 className={styles.HeaderHeading}>
           IP Address Tracker
@@ -46,7 +48,8 @@ const mapStateToProps = state => {
   return {
     value: state.value,
     options: state.options,
-    optionsVal: state.optionsVal
+    optionsVal: state.optionsVal,
+    spin: state.spin
   };
 };
 

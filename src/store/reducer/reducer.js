@@ -4,7 +4,8 @@ const initialState = {
   value: '',
   options: ['IP Address', 'Location', 'Timezone', 'ISP'],
   optionsVal: [],
-  latlng: [53.463059, -2.29134]
+  latlng: [53.463059, -2.29134],
+  spin: false
 };
 
 const reducer = (state = initialState, action) => {
@@ -18,7 +19,14 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         optionsVal: action.data,
-        latlng: action.latlng
+        latlng: action.latlng,
+        spin: action.spin
+      };
+    case actionTypes.SUBMITTED_FAIL:
+    case actionTypes.SUBMITTED_SUCCESS:
+      return {
+        ...state,
+        spin: action.spin
       };
     default:
       return state;
