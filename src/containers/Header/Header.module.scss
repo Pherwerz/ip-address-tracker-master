@@ -23,10 +23,11 @@
     display: flex;
     width: 100%;
     height: 7rem;
-    margin-bottom: 15rem;
+    margin-bottom: 28rem;
 
     @include respond(phone) {
       width: 60rem;
+      margin-bottom: 15rem;
     }
 
     & > * {
@@ -52,12 +53,16 @@
       width: 7rem;
       border-top-right-radius: 2rem;
       border-bottom-right-radius: 2rem;
+
+      &:hover {
+        background-color: #1f1f1f;
+      }
     }
   }
 
   &Body {
-    margin-top: 2rem;
-    width: 80%;
+    width: 90%;
+    height: 40rem;
     margin: 0 auto;
     background-color: #fff;
     position: absolute;
@@ -66,25 +71,61 @@
     display: flex;
     flex-flow: column;
     align-items: center;
+    justify-content: center;
     border-radius: 2rem;
-    padding: 2rem;
+
+    @include respond(mid) {
+      width: 80%;
+    }
 
     @include respond(phone) {
       flex-flow: row;
+      padding: 5rem;
+      align-items: flex-start;
+      height: auto;
     }
   }
 
   &Items {
-    flex: 1;
     display: flex;
     flex-flow: column;
+    align-items: center;
+    height: 15%;
+
+    &:not(:last-child) {
+      margin-bottom: 2rem;
+
+      @include respond(phone) {
+        margin-bottom: 0;
+      }
+    }
+
+    &:not(:first-child) {
+      @include respond(phone) {
+        border-left: 1px solid var(--dark-gray);
+        height: 10rem;
+        padding-left: 2rem;
+      }
+    }
+
+    @include respond(phone) {
+      flex: 1;
+      align-items: flex-start;
+      height: 100%;
+    }
 
     & p {
       color: var(--dark-gray);
+      font-weight: 700;
     }
 
-    & h2 {
+    & h3 {
       color: var(--very-dark-gray);
+      text-align: center;
+
+      @include respond(phone) {
+        text-align: left;
+      }
     }
   }
 }

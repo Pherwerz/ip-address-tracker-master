@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
 import leaflet from 'leaflet';
 import styles from './main.module.scss';
+import { connect } from 'react-redux';
+import location from '../../images/icon-location.svg';
 
 class Main extends Component {
   componentDidMount() {
-    var map = leaflet
+    const map = leaflet
       .map('map')
-      .setView([51.505, -0.09], 13);
+      .setView(this.props.latlng, 13);
 
     leaflet
       .tileLayer(
@@ -18,21 +20,28 @@ class Main extends Component {
       )
       .addTo(map);
 
+    const myIcon = leaflet.icon({
+      iconUrl: location
+    });
+
     leaflet
-      .marker([51.5, -0.09])
-      .addTo(map)
-      .bindPopup(
-        'A pretty CSS3 popup.<br> Easily customizable.'
-      )
-      .openPopup();
+      .marker(this.props.latlng, { icon: myIcon })
+      .addTo(map);
   }
+
   render() {
-    return (
-      <main className={styles.Main}>
-        <div id="map" className={styles.MainBody}></div>
-      </main>
+    let maps = (
+      <div id="map" className={styles.MainBody}></div>
     );
+
+    return <main className={styles.Main}>{maps}</main>;
   }
 }
 
-export default Main;
+const mapStateToProps = state => {
+  return {
+    latlng: state.latlng
+  };
+};
+
+export default connect(mapStateToProps)(Main);

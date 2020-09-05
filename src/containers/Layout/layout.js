@@ -5,9 +5,6 @@ import Footer from '../Footer/Footer';
 import styles from './layout.module.scss';
 
 class layout extends Component {
-  submited = () => {
-    alert('submitted');
-  };
   render() {
     return (
       <div className={styles.layout}>

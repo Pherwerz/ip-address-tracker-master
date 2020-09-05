@@ -1,69 +1,64 @@
-import React, { Component } from 'react';
+import React from 'react';
 import styles from './Header.module.scss';
 import go from '../../images/icon-arrow.svg';
+import { connect } from 'react-redux';
+import * as actionTypes from '../../store/action/action';
 
-class Header extends Component {
-  state = {
-    value: ''
-  };
+const Header = props => {
+  return (
+    <header className={styles.Header}>
+      <div className={styles.HeaderContainer}>
+        <h1 className={styles.HeaderHeading}>
+          IP Address Tracker
+        </h1>
 
-  valueChange = e => {
-    this.setState({ value: e.target.value });
-  };
+        <form
+          className={styles.HeaderForm}
+          onSubmit={e =>
+            props.onSubmitclick(e, props.value)
+          }
+        >
+          <input
+            type="text"
+            onChange={e => props.onButtonClick(e)}
+            value={props.value}
+            placeholder="Search for any IP address or domain"
+          />
+          <button>
+            <img src={go} alt="go" />
+          </button>
+        </form>
 
-  render() {
-    return (
-      <header className={styles.Header}>
-        <div className={styles.HeaderContainer}>
-          <h1 className={styles.HeaderHeading}>
-            IP Address Tracker
-          </h1>
-
-          <form
-            className={styles.HeaderForm}
-            onSubmit={this.props.submit}
-          >
-            <input
-              type="text"
-              onChange={this.valueChange}
-              value={this.state.value}
-              placeholder="Search for any IP address or domain"
-            />
-            <button>
-              <img src={go} alt="go" />
-            </button>
-          </form>
-
-          <div className={styles.HeaderBody}>
-            <div className={styles.HeaderItems}>
-              <p>IP Address</p>
-              <h2> </h2>
+        <div className={styles.HeaderBody}>
+          {props.options.map((cur, i) => (
+            <div key={cur} className={styles.HeaderItems}>
+              <p>{cur}</p>
+              <h3>{props.optionsVal[i]}</h3>
             </div>
-
-            <div className={styles.HeaderItems}>
-              <p>Location</p>
-              <h2></h2>
-            </div>
-
-            <div className={styles.HeaderItems}>
-              <p>Timezone</p>
-              <h2></h2>
-            </div>
-
-            <div className={styles.HeaderItems}>
-              <p> UTC</p>
-              <h2></h2>
-            </div>
-
-            <div className={styles.HeaderItems}>
-              <p> ISP</p>
-              <h2></h2>
-            </div>
-          </div>
+          ))}
         </div>
-      </header>
-    );
-  }
-}
+      </div>
+    </header>
+  );
+};
 
-export default Header;
+const mapStateToProps = state => {
+  return {
+    value: state.value,
+    options: state.options,
+    optionsVal: state.optionsVal
+  };
+};
+
+const mapDispatchToProps = dispatch => {
+  return {
+    onButtonClick: e => dispatch(actionTypes.saveInput(e)),
+    onSubmitclick: (e, val) =>
+      dispatch(actionTypes.submitted(e, val))
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Header);
