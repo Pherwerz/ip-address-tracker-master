@@ -3,7 +3,12 @@ import * as actionTypes from '../action/action';
 const initialState = {
   value: '',
   options: ['IP Address', 'Location', 'Timezone', 'ISP'],
-  optionsVal: [],
+  optionsVal: [
+    'old traford',
+    'manchester',
+    'UTC -1.00',
+    'GGMU'
+  ],
   latlng: [53.463059, -2.29134],
   spin: false
 };
